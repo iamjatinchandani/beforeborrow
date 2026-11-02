@@ -4,7 +4,7 @@
  *
  * Public routes: /, /login, /signup, /demo
  * Protected routes: /dashboard, /profile, /obligations, /calendar,
- *   /decision/new, /decision/:id, /reports/:id, /alerts, /settings
+ *   /decision/new, /decision/:id, /reports/:id, /alerts, /settings, /model-inspector
  */
 import { createBrowserRouter } from 'react-router-dom'
 import { AppShell } from '@/components/layout/AppShell'
@@ -18,6 +18,7 @@ import CalendarPage from '@/features/calendar/pages/CalendarPage'
 import DecisionPage from '@/features/decision/pages/DecisionPage'
 import ReportsPage from '@/features/reports/pages/ReportsPage'
 import AlertsPage from '@/features/alerts/pages/AlertsPage'
+import ModelInspectorPage from '@/features/model-inspector/pages/ModelInspectorPage'
 
 // Simple placeholders for Landing, Demo, Settings
 const LandingPage = () => (
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: '/reports/:id', element: <ReportsPage /> },
       { path: '/alerts', element: <AlertsPage /> },
       { path: '/settings', element: <SettingsPage /> },
+      { path: '/model-inspector', element: <ModelInspectorPage /> },
     ],
   },
 ])

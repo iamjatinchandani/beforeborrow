@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import { Component, type ErrorInfo, type ReactNode } from 'react'
 
 interface Props {
   children: ReactNode
@@ -26,7 +26,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      if (this.fallback) return this.props.fallback
+      if (this.props.fallback) return this.props.fallback
       return (
         <div style={{ padding: 24, margin: '24px auto', maxWidth: 600, background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8 }}>
           <h2 style={{ color: '#ef4444', marginBottom: 8 }}>Something went wrong</h2>
