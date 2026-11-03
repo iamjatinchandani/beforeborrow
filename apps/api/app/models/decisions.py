@@ -27,6 +27,8 @@ class Offer(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     scenario_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("scenarios.id", ondelete="CASCADE"), nullable=False)
+    offer_name: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    provider: Mapped[str | None] = mapped_column(String(128), nullable=True)
     offer_type: Mapped[str] = mapped_column(String(32), nullable=False)
     principal_paise: Mapped[int] = mapped_column(BigInteger, nullable=False)
     fees_paise: Mapped[int] = mapped_column(BigInteger, nullable=False, default=0)
@@ -72,6 +74,7 @@ class Alert(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     owner_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    alert_key: Mapped[str | None] = mapped_column(String(256), unique=True, nullable=True, index=True)
     alert_type: Mapped[str] = mapped_column(String(64), nullable=False)
     source_event_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
     due_date: Mapped[date | None] = mapped_column(Date, nullable=True)

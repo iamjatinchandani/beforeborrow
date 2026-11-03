@@ -1,10 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { queryKeys } from '@/lib/queryKeys'
 import { reportsApi } from './api'
 
-export function useReceipt(userId: string, id: string) {
+export function useReceipt(id?: string) {
   return useQuery({
-    queryKey: queryKeys.receipt(userId, id),
-    queryFn: ({ signal }) => reportsApi.getReceipt(id, signal),
+    queryKey: ['receipts', id],
+    queryFn: ({ signal }) => (id ? reportsApi.getReceipt(id, signal) : null),
+    enabled: Boolean(id),
+  })
+}
+
+export function useExportReceipt(id?: string) {
+  return useQuery({
+    queryKey: ['receipts', id, 'export'],
+    queryFn: ({ signal }) => (id ? reportsApi.exportReceipt(id, signal) : null),
+    enabled: false, // On-demand trigger
   })
 }

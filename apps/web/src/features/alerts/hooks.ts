@@ -1,10 +1,19 @@
-import { useQuery } from '@tanstack/react-query'
-import { queryKeys } from '@/lib/queryKeys'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { alertsApi } from './api'
 
-export function useAlerts(userId: string) {
+export function useAlerts() {
   return useQuery({
-    queryKey: queryKeys.alerts(userId),
+    queryKey: ['alerts'],
     queryFn: ({ signal }) => alertsApi.list(signal),
+  })
+}
+
+export function useDismissAlert() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string) => alertsApi.dismiss(id),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['alerts'] })
+    },
   })
 }
